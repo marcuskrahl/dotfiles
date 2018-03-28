@@ -10,4 +10,4 @@ Go to the repository directory:
 
 Create symbolic links to the files:
 
-`sh ./install.sh`
+`sh ./init.sh`
