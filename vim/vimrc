@@ -46,6 +46,7 @@ Plug 'scrooloose/syntastic'
 "Plug 'file:///home/marcus/tmp/vim-csharp'
 Plug 'jedverity/feral-vim'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'jceb/vim-orgmode'
 
 " Typescript dependencies
 " Plug 'leafgarland/typescript-vim'
@@ -145,3 +146,6 @@ nmap üü <c-]>
 
 let g:tsuquyomi_completion_detail = 1
 autocmd FileType typescript setlocal completeopt+=menu,preview
+
+" change move commands
+let g:move_key_modifier = 'C'
