@@ -46,7 +46,7 @@ Plug 'scrooloose/syntastic'
 "Plug 'file:///home/marcus/tmp/vim-csharp'
 Plug 'jedverity/feral-vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'jceb/vim-orgmode'
+Plug 'jceb/vim-orgmode' | Plug 'tpope/vim-speeddating'
 
 " Typescript dependencies
 " Plug 'leafgarland/typescript-vim'
@@ -57,6 +57,7 @@ Plug 'jceb/vim-orgmode'
 call plug#end()
 filetype plugin indent on
 
+set termguicolors
 set modelines=0
 
 set tabstop=4
@@ -147,5 +148,11 @@ nmap üü <c-]>
 let g:tsuquyomi_completion_detail = 1
 autocmd FileType typescript setlocal completeopt+=menu,preview
 
+" folded highlighting defaults to a light blue which is unreadable - overwrite
+" it here with a better shade
+hi Folded ctermbg=8
+
 " change move commands
 let g:move_key_modifier = 'C'
+
+" org mode config
