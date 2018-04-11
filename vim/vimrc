@@ -48,6 +48,12 @@ Plug 'jedverity/feral-vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'jceb/vim-orgmode' | Plug 'tpope/vim-speeddating'
 
+"FZF
+if !empty(glob('/usr/share/vim/vimfiles/plugin/fzf.vim'))
+    so /usr/share/vim/vimfiles/plugin/fzf.vim
+    Plug 'junegunn/fzf.vim'
+endif
+
 " Typescript dependencies
 " Plug 'leafgarland/typescript-vim'
 " Plug 'Quramy/tsuquyomi'
@@ -154,5 +160,9 @@ hi Folded ctermbg=8
 
 " change move commands
 let g:move_key_modifier = 'C'
+
+
+" FZF commands
+nmap <c-p> :Files<cr>
 
 " org mode config
