@@ -48,6 +48,8 @@ Plug 'jedverity/feral-vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'jceb/vim-orgmode' | Plug 'tpope/vim-speeddating'
+" Plug 'prabirshrestha/async.vim'
+" Plug 'prabirshrestha/vim-lsp'
 
 "FZF
 if !empty(glob('/usr/share/vim/vimfiles/plugin/fzf.vim'))
@@ -57,7 +59,7 @@ endif
 
 "deoplete
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
@@ -161,8 +163,8 @@ let g:syntastic_check_on_wq = 0
 
 nmap üü <c-]>
 
-let g:tsuquyomi_completion_detail = 1
-autocmd FileType typescript setlocal completeopt+=menu,preview
+" let g:tsuquyomi_completion_detail = 1
+" autocmd FileType typescript setlocal completeopt+=menu,preview
 
 " folded highlighting defaults to a light blue which is unreadable - overwrite
 " it here with a better shade
@@ -180,7 +182,7 @@ nmap <c-p> :Files<cr>
 
 
 " Language Server Protocol
-autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
+" autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {}
 if executable('javascript-typescript-stdio')
@@ -195,7 +197,25 @@ if executable('javascript-typescript-stdio')
     nnoremap <silent> <leader>la :call LanguageClient#textDocument_codeAction()<CR>
     nnoremap <silent> <leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
     nnoremap <silent> <leader>lS :call LanguageClient#workspace_symbol()<CR>
+    
+
+    let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
+    let g:LanguageClient_loggingLevel = 'INFO'
+    let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
+    let g:LanguageClient_waitOutputTimeout = 10
 else
     echo "javascript-typescript-stdio not installed!\n"
     :cq
 endif
+
+if executable('javascript-typescript-stdio')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'javascript-typescript-stdio',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'javascript-typescript-stdio']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+        \ 'whitelist': ['typescript'],
+        \ })
+endif
+
+let g:lsp_signs_enabled = 1         " enable signs
+let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
