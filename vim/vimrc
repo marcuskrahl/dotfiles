@@ -41,11 +41,12 @@ call plug#begin()
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'matze/vim-move'
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
 "Plug 'OrangeT/vim-csharp'
 "Plug 'file:///home/marcus/tmp/vim-csharp'
 Plug 'jedverity/feral-vim'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'jceb/vim-orgmode' | Plug 'tpope/vim-speeddating'
 
 "FZF
@@ -54,8 +55,17 @@ if !empty(glob('/usr/share/vim/vimfiles/plugin/fzf.vim'))
     Plug 'junegunn/fzf.vim'
 endif
 
+"deoplete
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 " Typescript dependencies
-" Plug 'leafgarland/typescript-vim'
+Plug 'leafgarland/typescript-vim'
 " Plug 'Quramy/tsuquyomi'
 " Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 " Plug 'fsharp/vim-fsharp', { 'for': 'fsharp', 'do': 'make fsautocomplete' }
@@ -91,7 +101,7 @@ syntax on
 set background=dark
 colorscheme feral
 
-let mapleader = ","
+let mapleader = " "
 
 nnoremap / /\v
 vnoremap / /\v
@@ -166,3 +176,26 @@ let g:move_key_modifier = 'C'
 nmap <c-p> :Files<cr>
 
 " org mode config
+"
+
+
+" Language Server Protocol
+autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {}
+if executable('javascript-typescript-stdio')
+    let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
+    let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
+    "let g:LanguageClient_serverCommands.typescript = ['tcp://127.0.0.1:2089']
+    autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
+    autocmd FileType typescript setlocal omnifunc=LanguageClient#complete
+    nnoremap <silent> <leader>lh :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <silent> <leader>ld :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <silent> <leader>lr :call LanguageClient#textDocument_rename()<CR>
+    nnoremap <silent> <leader>la :call LanguageClient#textDocument_codeAction()<CR>
+    nnoremap <silent> <leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
+    nnoremap <silent> <leader>lS :call LanguageClient#workspace_symbol()<CR>
+else
+    echo "javascript-typescript-stdio not installed!\n"
+    :cq
+endif
