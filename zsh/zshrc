@@ -3,7 +3,10 @@
 HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=100000
-bindkey -e
+
+#VIM Keybindings
+bindkey -v
+bindkey jj vi-cmd-mode 
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/marcus/.zshrc'
@@ -120,6 +123,8 @@ systeminfo
 
 [ -s "/home/marcus/.dnx/dnvm/dnvm.sh" ] && . "/home/marcus/.dnx/dnvm/dnvm.sh" # Load dnvm
 
-# If not running interactively, do not do anything
-[[ $- != *i* ]] && return
-#[[ -z "$TMUX" ]] && exec tmux
+if [[ $DISPLAY ]]; then
+    # If not running interactively, do not do anything
+    [[ $- != *i* ]] && return
+    [[ -z "$TMUX" ]] && exec tmux
+fi
