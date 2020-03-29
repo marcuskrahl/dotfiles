@@ -421,4 +421,5 @@ tnoremap jj <C-\><C-n>
 
 
 "nerdtree config
-nnoremap <leader>f :NERDTreeToggle<cr>
+nnoremap <leader>ff :NERDTreeFocus<cr>
+nnoremap <leader>fc :NERDTreeClose<cr>
