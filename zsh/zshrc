@@ -17,6 +17,10 @@ autoload -Uz compinit promptinit colors vcs_info
 compinit
 promptinit
 colors
+
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
 # End of lines added by compinstall
 
 #Lookup unknown commands
