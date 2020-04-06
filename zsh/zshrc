@@ -125,7 +125,7 @@ PROMPT='%B%F{105}%n%f%b on %B%F{203}%m%f%b at %B%F{223}%~%f%b ${vcs_info_msg_0_}
 # setup path
 export PATH="$PATH:/home/marcus/.dotnet/tools"
 
-systeminfo
+[ -s "`which systeminfo`" ] && systeminfo
 
 [ -s "/home/marcus/.dnx/dnvm/dnvm.sh" ] && . "/home/marcus/.dnx/dnvm/dnvm.sh" # Load dnvm
 
