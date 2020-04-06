@@ -27,4 +27,5 @@ fi
 #Add local bin
 export PATH=$PATH:$HOME/bin
 
+export EDITOR='nvim'
 #[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
