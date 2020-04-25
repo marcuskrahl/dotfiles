@@ -404,8 +404,7 @@ nnoremap <silent> <space>s  :<C-u>CocList coc-service<cr>
 nnoremap <silent> <space>l  :<C-u>CocList coc-link<cr>
 
 
-" denite config
-call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git'])
+" fuzzy finding config
 nnoremap <C-p> :Files<cr>
 nnoremap <C-b> :Buffers<cr>
 tnoremap <C-b> :Buffers<cr>
