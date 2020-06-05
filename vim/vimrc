@@ -90,7 +90,7 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
 " :CocInstall coc-tsserver coc-tslint-plugin
 " Plug 'Shougo/deoplete.nvim'
-Plug 'Shougo/denite.nvim'
+" Plug 'Shougo/denite.nvim'
 
 "FZF
 if !empty(glob('/usr/share/vim/vimfiles/plugin/fzf.vim'))
@@ -406,9 +406,9 @@ nnoremap <silent> <space>l  :<C-u>CocList coc-link<cr>
 
 " denite config
 call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git'])
-nnoremap <C-p> :Denite file/rec<cr>
-nnoremap <C-b> :Denite buffer<cr>
-tnoremap <C-b> :Denite buffer<cr>
+nnoremap <C-p> :Files<cr>
+nnoremap <C-b> :Buffers<cr>
+tnoremap <C-b> :Buffers<cr>
 
 " tmux like windows
 nnoremap <C-a>c :terminal<cr>
