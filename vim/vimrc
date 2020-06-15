@@ -97,6 +97,10 @@ if !empty(glob('/usr/share/vim/vimfiles/plugin/fzf.vim'))
     so /usr/share/vim/vimfiles/plugin/fzf.vim
     Plug 'junegunn/fzf.vim'
 endif
+if !empty(glob('/usr/share/doc/fzf/examples/plugin/fzf.vim'))
+    so /usr/share/doc/fzf/examples/plugin/fzf.vim
+    Plug 'junegunn/fzf.vim'
+endif
 
 "deoplete
 if has('nvim')
@@ -395,7 +399,8 @@ let g:lightline = {
 nnoremap <C-p> :Files<cr>
 nnoremap <C-b> :Buffers<cr>
 tnoremap <C-b> :Buffers<cr>
-
+" Shortcuts for denite interface
+" Show symbols of current buffer
 " tmux like windows
 nnoremap <C-a>c :terminal<cr>
 nnoremap <A-n> :bnext<cr>
@@ -409,3 +414,8 @@ tnoremap jj <C-\><C-n>
 "nerdtree config
 nnoremap <leader>ff :NERDTreeFocus<cr>
 nnoremap <leader>fc :NERDTreeClose<cr>
+
+autocmd BufWritePre *.ts CocCommand prettier.formatFile 
+autocmd BufWritePre *.html CocCommand prettier.formatFile 
+autocmd BufWritePre *.js CocCommand prettier.formatFile 
+autocmd BufWritePre *.json CocCommand prettier.formatFile 

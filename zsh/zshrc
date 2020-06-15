@@ -18,8 +18,18 @@ compinit
 promptinit
 colors
 
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+source_files=(
+	/usr/share/fzf/key-bindings.zsh
+	/usr/share/fzf/completion.zsh
+	/usr/share/doc/fzf/examples/key-bindings.zsh
+	/usr/share/zsh/vendor-completions/_fzf
+)
+for source_file in $source_files; do
+	if [ -f "$source_file" ]
+	then
+		source $source_file
+	fi
+done
 
 # End of lines added by compinstall
 
