@@ -4,6 +4,9 @@ HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=100000
 
+# Disable X11 Scaling (alacritty)
+export WINIT_X11_SCALE_FACTOR=1
+
 #VIM Keybindings
 bindkey -v
 bindkey jj vi-cmd-mode 
@@ -12,7 +15,6 @@ bindkey jj vi-cmd-mode
 zstyle :compinstall filename '/home/marcus/.zshrc'
 
 fpath=($HOME/.zsh-completions $fpath)
-
 autoload -Uz compinit promptinit colors vcs_info
 compinit
 promptinit
